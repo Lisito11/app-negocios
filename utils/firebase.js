@@ -1,7 +1,8 @@
-import firebase from 'firebase'
-import { v4 as uuidv4 } from 'uuid';
+import firebase from 'firebase/compat/app'
 
-import 'firebase/firestore'
+import 'firebase/compat/firestore'
+import 'firebase/compat/storage'
+import { fileToBlob } from './helpers';
 
 
 const firebaseConfig = {
@@ -44,7 +45,26 @@ export const getAllBusiness = async () => {
 
 }
 
-const uploadImage = async (image) => {
-    
+export const uploadImageToFirebase = async (image, path, name) => {
+    const result = {statusResponse: false, error:null, url:null};
+    const ref = firebase.storage().ref(path).child(name);
+    const blob = await fileToBlob(image);
+
+    try {
+        await ref.put(blob);
+        const url = await firebase.storage().ref(`${path}/${name}`).getDownloadURL();
+        result.statusResponse = true;
+        result.url = url;
+    } catch (error) {
+        result.error = error;
+
+    }
+    console.log(result)
+    return result;
 }
+
+// const response = await uploadImage(image, "business", uuidv4())
+// if (response.statusResponse){
+//     console.log('imagen subida correctamente');
+// }
 
