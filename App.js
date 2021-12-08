@@ -1,21 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { EditScreen } from './screens/EditScreen';
+import { MapScreen } from './screens/MapScreen';
+import { CreateScreen } from './screens/CreateScreen';
+import { HomeScreen } from './screens/HomeScreen';
+import { DetailsScreen } from './screens/DetailsScreen';
+
+const HomeStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const screenOptions = ({ route }) => ({
+  tabBarIcon: ({ focused, color, size }) => {
+    let iconName;
+
+    if (route.name === 'Home') {
+      iconName = focused
+        ? 'ios-list-outline'
+        : 'ios-list';
+    } else if (route.name === 'Map') {
+      iconName = focused ? 'ios-navigate-circle' : 'ios-navigate-circle-outline';
+    }
+    return <Ionicons name={iconName} size={size} color={color} />;
+  },
+  tabBarActiveTintColor: '#009dff',
+  tabBarInactiveTintColor: 'gray',
+
+})
+
+export const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Details" component={DetailsScreen} />
+      <HomeStack.Screen name="Edit" component={EditScreen} />
+      <HomeStack.Screen name="Create" component={CreateScreen} />
+    </HomeStack.Navigator>
+  )
+}
+
+const MyStack = () => {
+  return (
+    <Tab.Navigator screenOptions={screenOptions} >
+      <Tab.Screen name="Home" options={{headerShown:false}} component={HomeStackScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <MyStack/>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
