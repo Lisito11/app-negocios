@@ -60,9 +60,9 @@ export const HomeScreen = () => {
   return (
     <View>
       <Text>Home Screen</Text>
-      
+
       {/* CODIGO DE EJEMPLO */}
-      
+
       <MyImage />
 
       <View

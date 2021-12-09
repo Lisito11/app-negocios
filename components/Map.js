@@ -1,7 +1,7 @@
 import React from 'react'
 import MapView, { Marker } from 'react-native-maps' //TODO Instalar esta dependencia...
 import { StyleSheet, Dimensions } from 'react-native'
-import response from '../utils/data-test'
+import response from '../utils/response'
 
 //? Variable para guardar el size de la pantalla del dispositivo.
 const height = Dimensions.get('window').height
