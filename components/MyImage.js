@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { uploadImageToFirebase } from '../utils/firebase';
-import { uuid } from 'uuidv4';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function MyImage() {
   const [image, setImage] = useState(null);
@@ -26,18 +26,21 @@ export default function MyImage() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
     }
 
-    const response = await uploadImageToFirebase(result, "business", v4());
-    if (response.statusResponse){
-        console.log('imagen subida correctamente');
-    }
-    };
+    //Esto va en la parte del formulario
+    const namePic = new Date().toISOString();    
+    const response = await uploadImageToFirebase(result, "business", namePic);
 
+    //Esto verifica si la imagen se subio correctamente
+    if (response.statusResponse){
+        //Url de la imagen a guardar en la db cuando se suba a firebase
+        console.log(response.url);
+    }
+  };
+  
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button title="Pick an image" onPress={pickImage} />

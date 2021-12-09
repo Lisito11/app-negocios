@@ -2,7 +2,7 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
 export const fileToBlob = async(path) => {
-    const file = await fetch(path);
+    const file = await fetch(path.uri);
     const blob = await file.blob();
     return blob
 }

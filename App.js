@@ -16,7 +16,7 @@ const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
     let iconName;
 
-    if (route.name === 'Home') {
+    if (route.name === 'HomeTab') {
       iconName = focused
         ? 'ios-list-outline'
         : 'ios-list';
