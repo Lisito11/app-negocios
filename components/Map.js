@@ -20,13 +20,13 @@ const Map = () => {
         >
             {response.map(marker => (
                 <MapView.Marker
-                    key={marker.id}
+                    key={marker[0].id}
                     coordinate={{
-                        latitude: marker.latitude,
-                        longitude: marker.longitude,
+                        latitude: marker[1].lat,
+                        longitude: marker[1].lng,
                     }}
-                    title={marker.title}
-                    description={marker.description}
+                    title={marker[1].name}
+                    description={marker[1].type}
 
                 />
             ))}

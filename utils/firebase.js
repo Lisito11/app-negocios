@@ -84,7 +84,8 @@ export const getAllBusiness = async () => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+        
+        data.push([doc.id, doc.data()]);
       });
     });
   return data;

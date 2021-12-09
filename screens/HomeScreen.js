@@ -53,7 +53,7 @@ export const HomeScreen = () => {
   };
 
   const busId = async () => {
-    const negocio = await getBusinessById("2021-12-09T05:39:56.250Z");
+    const negocio = await getBusinessById("2021-12-09T13:33:55.554Z");
     console.log(negocio);
   };
 
@@ -108,7 +108,7 @@ export const HomeScreen = () => {
       >
         <Button
           title="Edit business"
-          onPress={() => editDocument("1wJlpgT32kgGnXkrpgVc")}
+          onPress={() => editDocument("JmyrLTHbwNCk9riLCRBl")}
         />
       </View>
       <View
@@ -121,7 +121,7 @@ export const HomeScreen = () => {
       >
         <Button
           title="Delete business"
-          onPress={() => deleteDocument("1wJlpgT32kgGnXkrpgVc")}
+          onPress={() => deleteDocument("JmyrLTHbwNCk9riLCRBl")}
         />
       </View>
     </View>
