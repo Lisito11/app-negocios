@@ -32,7 +32,7 @@ export default function MyImage() {
       setImage(result.uri);
     }
 
-    const response = await uploadImageToFirebase(result, "business", uuid());
+    const response = await uploadImageToFirebase(result, "business", v4());
     if (response.statusResponse){
         console.log('imagen subida correctamente');
     }

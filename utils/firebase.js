@@ -42,12 +42,12 @@ export const getBusinessById = async (id) => {
 }
 
 export const getAllBusiness = async () => {
-
+    const querySnapshot = await getDo
 }
 
 export const uploadImageToFirebase = async (image, path, name) => {
     const result = {statusResponse: false, error:null, url:null};
-    const ref = firebase.storage().ref(path).child(name);
+    const ref = firebase.storage().ref(path).child(`${name}.jpg`);
     const blob = await fileToBlob(image);
 
     try {
@@ -57,7 +57,6 @@ export const uploadImageToFirebase = async (image, path, name) => {
         result.url = url;
     } catch (error) {
         result.error = error;
-
     }
     console.log(result)
     return result;

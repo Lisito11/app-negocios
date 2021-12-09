@@ -44,7 +44,7 @@ export const HomeStackScreen = () => {
 const MyStack = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions} >
-      <Tab.Screen name="Home" options={{headerShown:false}} component={HomeStackScreen} />
+      <Tab.Screen name="HomeTab" options={{headerShown:false}} component={HomeStackScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   )
