@@ -3,7 +3,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import { fileToBlob } from "./helpers";
 
-const firebaseConfig = {
+const firebaseConfig1 = {
   apiKey: "AIzaSyBc0ePB4PPhC6Fn2zp9y4ViLRHyiVqTwd0",
   authDomain: "app-negocios-ca8b7.firebaseapp.com",
   projectId: "app-negocios-ca8b7",
@@ -13,7 +13,16 @@ const firebaseConfig = {
   measurementId: "${config.measurementId}",
 };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseConfig2 = {
+  apiKey: "AIzaSyCjTLP8TLkgoKVc3v_WeWuw9JMs9wsw9xc",
+  authDomain: "appnegocios2-a4af5.firebaseapp.com",
+  projectId: "appnegocios2-a4af5",
+  storageBucket: "appnegocios2-a4af5.appspot.com",
+  messagingSenderId: "490467620471",
+  appId: "1:490467620471:web:9c2e6dd6040cb1cd2ff872"
+};
+
+firebase.initializeApp(firebaseConfig2);
 const db = firebase.firestore();
 
 export const saveNewBusiness = async (business) => {
