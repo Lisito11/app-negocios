@@ -7,6 +7,8 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Button,
+  Alert
 } from "react-native";
 import { getAllBusiness, getBusinessById } from "../utils/firebase";
 
@@ -16,31 +18,37 @@ const getBusssines = async () => {
   return negocios;
 };
 
-
-
 //? Componente para mostrar un negocio
-
 //TODO sacarlo en un archivo aparte y mejorar apariencia [Cristian la para] y Agregar mas elementos del negocio como la foto, el tipo, la direccion etc para que se muestre todo eso.
 
-//TODO agregar icono de editar e icono de eliminar ver si se puede hacer que cuando se presionen se vaya a la pagina de editar el neogicio y el icono de eliminar cuando se presione, elimine el negocio [Cristian]
 const ListItem = ({ item, onPress, update, deleteBus }) => {
   return (
     //En caso de que sea necesario cambiar el touchableopacity para que se pueda agregar el icono de eliminar o editar se puede poner un view y agregar esos elementos.
     <TouchableOpacity onPress={onPress} style={styles.listItem}>
       <Text style={styles.listText}>{item.name}</Text>
+      <View style={styles.btnContainer}>
+
+        <TouchableOpacity onPress={onPress} style={styles.btnDelete}>
+          <Text style={styles.btnText}>Borrar 🗑️</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onPress} style={styles.btnEdit}>
+          <Text style={styles.btnText}>Editar 📝</Text>
+        </TouchableOpacity>
+
+      </View>
     </TouchableOpacity>
   );
 };
 
 export const HomeScreen = () => {
   //TODO implementar funcion para cuando se presione un negocio nos mande a la vista detalle y esa vista detalle muestre toda la info necesaria del negocio
-  const viewSelectedBusiness = () => {};
+  const viewSelectedBusiness = () => { };
 
   //TODO
-  const updateBusiness = () => {};
+  const updateBusiness = () => { };
 
   //TODO
-  const deleteBusiness = () => {};
+  const deleteBusiness = () => { };
 
   const [items, setItems] = useState([]);
   getBusssines().then((items) => setItems(items));
@@ -70,21 +78,56 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 20,
   },
   flatList: {
     width: "100%",
   },
   listText: {
     color: "white",
+    fontSize: 30,
   },
   listItem: {
     flex: 1,
     marginRight: 20,
     marginLeft: 20,
     marginTop: 10,
-    backgroundColor: "#776677",
-    padding: 10,
+    backgroundColor: "#2f4f4f",
+    padding: 15,
     borderRadius: 5,
+  },
+  btnEdit: {
+    backgroundColor: '#ff8c00',
+    marginTop: 10,
+    marginEnd: 5,
+    width: 100,
+    height: 40,
+    borderRadius: 7,
+    padding: 7,
+    borderWidth: 2,
+    borderColor: "silver"
+  },
+  btnDelete: {
+    backgroundColor: '#b22222',
+    marginTop: 10,
+    marginEnd: 5,
+    width: 100,
+    height: 40,
+    borderRadius: 7,
+    padding: 7,
+    borderWidth: 2,
+    borderColor: "silver"
+  },
+  btnText: {
+    fontSize: 15,
+    color: "white",
+    marginTop: 2,
+    marginLeft: 15,
+  },
+
+  btnContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row-reverse"
   },
 });
