@@ -16,7 +16,7 @@ const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
     let iconName;
 
-    if (route.name === 'HomeTab') {
+    if (route.name === 'Home') {
       iconName = focused
         ? 'ios-list-outline'
         : 'ios-list';
@@ -33,7 +33,7 @@ const screenOptions = ({ route }) => ({
 export const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="HomeTab" options={{title:"Home"}} component={HomeScreen} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
       <HomeStack.Screen name="Edit" component={EditScreen} />
       <HomeStack.Screen name="Create" component={CreateScreen} />
@@ -44,7 +44,7 @@ export const HomeStackScreen = () => {
 const MyStack = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions} >
-      <Tab.Screen name="HomeTab" options={{headerShown:false}} component={HomeStackScreen} />
+      <Tab.Screen name="Home" options={{headerShown:false}} component={HomeStackScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   )

@@ -55,40 +55,24 @@ export const deleteBusiness = async (id) => {
     .delete()
     .then(() => {
       console.log("Document successfully deleted!");
-      status = true;
     })
     .catch((error) => {
       console.error("Error removing document: ", error);
     });
-   //return status;
 };
 
 //Le debes de pasar el campo uid del documento, no el que se crea automaticamente.
 export const getBusinessById = async (id) => {
   let document = {};
-  await db
-    .collection("business")
-    .where("uid", "==", id)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        document = doc.data();
-      });
-    });
+  (await db.collection("business").where("uid", "==", id).get()).forEach(doc => document = doc.data());
   return document;
 };
 
 export const getAllBusiness = async () => {
   let data = [];
-  db.collection("business")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        
-        data.push([doc.id, doc.data()]);
-      });
-    });
+  (await db.collection("business").get()).forEach(doc => data.push([doc.id,doc.data()]));
   return data;
+  
 };
 
 export const uploadImageToFirebase = async (image, path, name) => {

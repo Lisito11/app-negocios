@@ -1,129 +1,90 @@
-import React from "react";
-import { Text, View, Button } from "react-native";
-import MyImage from "../components/MyImage";
+import React, { useEffect, useState } from "react";
 import {
-  updateBusiness,
-  getBusinessById,
-  saveNewBusiness,
-} from "../utils/firebase";
-import { deleteBusiness, getAllBusiness } from "./../utils/firebase";
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
+import { getAllBusiness, getBusinessById } from "../utils/firebase";
 
-export const HomeScreen = () => {
-  //Ejemplo de implementacion en el form y vistas
-  const create = async () => {
-    const tempData = {
-      name: "prueba 1",
-      type: "cocina",
-      pic: "prueba",
-      cellphone: "849-280-2042",
-      direction: "Higuey city",
-      lat: -18.4754654,
-      lng: 70.4478421,
-    };
+//? Funcion para traer los negocios
+const getBusssines = async () => {
+  const negocios = await getAllBusiness();
+  return negocios;
+};
 
-    const createdBusiness = await saveNewBusiness(tempData);
-    if (createdBusiness) {
-      console.log("Se creo satisfatoriamente");
-    }
-  };
 
-  const deleteDocument = async (id) => {
-    const deleted = await deleteBusiness(id);
-    console.log(deleted);
-  };
 
-  const editDocument = async (id) => {
-    const tempData = {
-      name: "prueba editadaaaaaaa",
-      type: "cocinassss",
-      pic: "pruebaa",
-      cellphone: "849-280-2042",
-      direction: "Higuey city",
-      lat: -18.4754654,
-      lng: 70.4478421,
-    };
+//? Componente para mostrar un negocio
 
-    const uptaded = await updateBusiness(id, tempData);
-    console.log(uptaded);
-  };
+//TODO sacarlo en un archivo aparte y mejorar apariencia [Cristian la para] y Agregar mas elementos del negocio como la foto, el tipo, la direccion etc para que se muestre todo eso.
 
-  const bus = async () => {
-    const negocios = await getAllBusiness();
-    console.log(negocios);
-  };
-
-  const busId = async () => {
-    const negocio = await getBusinessById("2021-12-09T13:33:55.554Z");
-    console.log(negocio);
-  };
-
+//TODO agregar icono de editar e icono de eliminar ver si se puede hacer que cuando se presionen se vaya a la pagina de editar el neogicio y el icono de eliminar cuando se presione, elimine el negocio [Cristian]
+const ListItem = ({ item, onPress, update, deleteBus }) => {
   return (
-    <View>
-      <Text>Home Screen</Text>
-      
-      {/* CODIGO DE EJEMPLO */}
-      
-      <MyImage />
-
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
-        }}
-      >
-        <Button title="Create Business" onPress={create} />
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
-        }}
-      >
-        <Button title="Get All Business (view in console)" onPress={bus} />
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
-        }}
-      >
-        <Button title="Get business id (view in console)" onPress={busId} />
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
-        }}
-      >
-        <Button
-          title="Edit business"
-          onPress={() => editDocument("JmyrLTHbwNCk9riLCRBl")}
-        />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
-        }}
-      >
-        <Button
-          title="Delete business"
-          onPress={() => deleteDocument("JmyrLTHbwNCk9riLCRBl")}
-        />
-      </View>
-    </View>
+    //En caso de que sea necesario cambiar el touchableopacity para que se pueda agregar el icono de eliminar o editar se puede poner un view y agregar esos elementos.
+    <TouchableOpacity onPress={onPress} style={styles.listItem}>
+      <Text style={styles.listText}>{item.name}</Text>
+    </TouchableOpacity>
   );
 };
+
+export const HomeScreen = () => {
+  //TODO implementar funcion para cuando se presione un negocio nos mande a la vista detalle y esa vista detalle muestre toda la info necesaria del negocio
+  const viewSelectedBusiness = () => {};
+
+  //TODO
+  const updateBusiness = () => {};
+
+  //TODO
+  const deleteBusiness = () => {};
+
+  const [items, setItems] = useState([]);
+  getBusssines().then((items) => setItems(items));
+
+  return (
+    <SafeAreaView style={styles.parentView}>
+      <FlatList
+        style={styles.flatList}
+        data={items}
+        keyExtractor={(item) => item[0].toString()}
+        renderItem={({ item }) => (
+          <ListItem
+            item={item[1]}
+            onPress={() => viewSelectedBusiness}
+            update={() => updateBusiness}
+            deleteBus={() => deleteBusiness}
+          />
+        )}
+      />
+    </SafeAreaView>
+  );
+};
+
+//TODO Mejorar los styles [Cristian]
+const styles = StyleSheet.create({
+  parentView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  flatList: {
+    width: "100%",
+  },
+  listText: {
+    color: "white",
+  },
+  listItem: {
+    flex: 1,
+    marginRight: 20,
+    marginLeft: 20,
+    marginTop: 10,
+    backgroundColor: "#776677",
+    padding: 10,
+    borderRadius: 5,
+  },
+});

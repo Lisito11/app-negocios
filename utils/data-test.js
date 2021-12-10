@@ -33,6 +33,5 @@ import { getAllBusiness } from './firebase';
 // ]
 
 
-const response = getAllBusiness();
 
 export default response

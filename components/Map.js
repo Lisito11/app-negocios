@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps' //TODO Instalar esta dependencia...
 import { StyleSheet, Dimensions } from 'react-native'
-import response from '../utils/data-test'
+import { getAllBusiness } from './../utils/firebase';
+import { LogBox } from 'react-native';
+
 
 //? Variable para guardar el size de la pantalla del dispositivo.
-const height = Dimensions.get('window').height
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 const Map = () => {
+    const [markers, setMarker] = useState([]);
+    const business = async () => {
+        const res = await getAllBusiness();
+        setMarker(res);
+    }
+
+    useEffect(async () => {
+       business();
+    }, [])
+
+
     return (
         <MapView
             style={styles.map}
@@ -18,9 +34,11 @@ const Map = () => {
                 longitudeDelta: 70
             }}
         >
-            {response.map(marker => (
+            {
+            
+            markers && (markers !== [] ? markers.map(marker => (
                 <MapView.Marker
-                    key={marker[0].id}
+                    key={marker[0]}
                     coordinate={{
                         latitude: marker[1].lat,
                         longitude: marker[1].lng,
@@ -29,7 +47,10 @@ const Map = () => {
                     description={marker[1].type}
 
                 />
-            ))}
+            )) : "")
+            
+            
+            }
 
         </MapView>
     )
@@ -37,7 +58,8 @@ const Map = () => {
 
 const styles = StyleSheet.create({
     map: {
-        height
+        height,
+        width
     }
 })
 
