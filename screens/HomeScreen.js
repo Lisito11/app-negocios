@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  Image,
   TouchableOpacity,
   Button,
   Alert
@@ -25,9 +26,14 @@ const ListItem = ({ item, onPress, update, deleteBus }) => {
   return (
     //En caso de que sea necesario cambiar el touchableopacity para que se pueda agregar el icono de eliminar o editar se puede poner un view y agregar esos elementos.
     <TouchableOpacity onPress={onPress} style={styles.listItem}>
-      <Text style={styles.listText}>{item.name}</Text>
+      <View style={styles.headContainer}>
+        <Image
+          source={{ uri: item.pic }}
+          style={styles.image}
+        />
+        <Text style={styles.listText}>{item.name}</Text>
+      </View>
       <View style={styles.btnContainer}>
-
         <TouchableOpacity onPress={onPress} style={styles.btnDelete}>
           <Text style={styles.btnText}>Borrar 🗑️</Text>
         </TouchableOpacity>
@@ -86,6 +92,8 @@ const styles = StyleSheet.create({
   listText: {
     color: "white",
     fontSize: 30,
+    marginStart: 20,
+    marginTop: 5,
   },
   listItem: {
     flex: 1,
@@ -129,5 +137,18 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     flexDirection: "row-reverse"
+  },
+  headContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 10,
+  },
+  image: {
+    marginStart: 5,
+    width: 60,
+    height: 60,
+    backgroundColor: "white",
+    borderRadius: 35,
   },
 });
