@@ -11,7 +11,7 @@ import {
   Button,
   Alert
 } from "react-native";
-import { getAllBusiness, getBusinessById } from "../utils/firebase";
+import { deleteBusiness, getAllBusiness, getBusinessById, updateBusiness } from "../utils/firebase";
 
 //? Funcion para traer los negocios
 // const getBusssines = async () => {
@@ -34,10 +34,10 @@ const ListItem = ({ item, onPress, update, deleteBus }) => {
         <Text style={styles.listText}>{item.name}</Text>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={onPress} style={styles.btnDelete}>
+        <TouchableOpacity onPress={deleteBus} style={styles.btnDelete}>
           <Text style={styles.btnText}>Borrar 🗑️</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPress} style={styles.btnEdit}>
+        <TouchableOpacity onPress={update} style={styles.btnEdit}>
           <Text style={styles.btnText}>Editar 📝</Text>
         </TouchableOpacity>
 
@@ -46,21 +46,29 @@ const ListItem = ({ item, onPress, update, deleteBus }) => {
   );
 };
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}) => {
   //TODO implementar funcion para cuando se presione un negocio nos mande a la vista detalle y esa vista detalle muestre toda la info necesaria del negocio
   const viewSelectedBusiness = () => { };
 
   //TODO
-  const updateBusiness = () => { };
+  const updateBusinesss = async (bus,id) => { 
+    navigation.navigate('Edit', {editbusiness: bus, idbusiness:id});
+  };
 
   //TODO
-  const deleteBusiness = () => { };
+  const deleteBusinesss = async (id) => {
+    const deleted = await deleteBusiness(id);
+    console.log(deleted);
+  };
 
   const [items, setItems] = useState([]);
-  // getBusssines().then((items) => setItems(items));
+  // useEffect(async () => {
+  //   getAllBusiness().then((items) => setItems(items));
+  // }, [deleteBusinesss])
 
   return (
     <SafeAreaView style={styles.parentView}>
+      <Button title="Añadir Negocio" onPress={() => navigation.navigate('Create')}></Button>
       <FlatList
         style={styles.flatList}
         data={items}
@@ -69,8 +77,8 @@ export const HomeScreen = () => {
           <ListItem
             item={item[1]}
             onPress={() => viewSelectedBusiness}
-            update={() => updateBusiness}
-            deleteBus={() => deleteBusiness}
+            update={() => updateBusinesss(item[1],item[0])}
+            deleteBus={() => deleteBusinesss(item[0])}
           />
         )}
       />

@@ -33,9 +33,9 @@ const screenOptions = ({ route }) => ({
 export const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Create" component={CreateScreen} />
       <HomeStack.Screen name="HomeTab" options={{ title: "Home" }} component={HomeScreen} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
+      <HomeStack.Screen name="Create" component={CreateScreen} />
       <HomeStack.Screen name="Edit" component={EditScreen} />
     </HomeStack.Navigator>
   )
