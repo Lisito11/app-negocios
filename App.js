@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -33,10 +33,10 @@ const screenOptions = ({ route }) => ({
 export const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeTab" options={{title:"Home"}} component={HomeScreen} />
+      <HomeStack.Screen name="Create" component={CreateScreen} />
+      <HomeStack.Screen name="HomeTab" options={{ title: "Home" }} component={HomeScreen} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
       <HomeStack.Screen name="Edit" component={EditScreen} />
-      <HomeStack.Screen name="Create" component={CreateScreen} />
     </HomeStack.Navigator>
   )
 }
@@ -44,7 +44,7 @@ export const HomeStackScreen = () => {
 const MyStack = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions} >
-      <Tab.Screen name="Home" options={{headerShown:false}} component={HomeStackScreen} />
+      <Tab.Screen name="Home" options={{ headerShown: false }} component={HomeStackScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   )
@@ -53,7 +53,7 @@ const MyStack = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack/>
+      <MyStack />
     </NavigationContainer>
   );
 }

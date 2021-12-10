@@ -14,10 +14,10 @@ import {
 import { getAllBusiness, getBusinessById } from "../utils/firebase";
 
 //? Funcion para traer los negocios
-const getBusssines = async () => {
-  const negocios = await getAllBusiness();
-  return negocios;
-};
+// const getBusssines = async () => {
+//   const negocios = await getAllBusiness();
+//   return negocios;
+// };
 
 //? Componente para mostrar un negocio
 //TODO sacarlo en un archivo aparte y mejorar apariencia [Cristian la para] y Agregar mas elementos del negocio como la foto, el tipo, la direccion etc para que se muestre todo eso.
@@ -57,7 +57,7 @@ export const HomeScreen = () => {
   const deleteBusiness = () => { };
 
   const [items, setItems] = useState([]);
-  getBusssines().then((items) => setItems(items));
+  // getBusssines().then((items) => setItems(items));
 
   return (
     <SafeAreaView style={styles.parentView}>

@@ -31,19 +31,22 @@ export default function MyImage() {
     }
 
     //Esto va en la parte del formulario
-    const namePic = new Date().toISOString();    
+    const namePic = new Date().toISOString();
     const response = await uploadImageToFirebase(result, "business", namePic);
 
     //Esto verifica si la imagen se subio correctamente
-    if (response.statusResponse){
-        //Url de la imagen a guardar en la db cuando se suba a firebase
-        console.log(response.url);
+    if (response.statusResponse) {
+      //Url de la imagen a guardar en la db cuando se suba a firebase
+      console.log(response.url);
     }
   };
-  
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image" onPress={pickImage} />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+      <Button
+        title="Seleccionar Imagen"
+        onPress={pickImage}
+        color="#483d8b"
+      />
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
     </View>
   );
