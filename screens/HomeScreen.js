@@ -20,8 +20,6 @@ import { deleteBusiness, getAllBusiness, getBusinessById, updateBusiness } from 
 // };
 
 //? Componente para mostrar un negocio
-//TODO sacarlo en un archivo aparte y mejorar apariencia [Cristian la para] y Agregar mas elementos del negocio como la foto, el tipo, la direccion etc para que se muestre todo eso.
-
 const ListItem = ({ item, onPress, update, deleteBus }) => {
   return (
     //En caso de que sea necesario cambiar el touchableopacity para que se pueda agregar el icono de eliminar o editar se puede poner un view y agregar esos elementos.
@@ -46,13 +44,17 @@ const ListItem = ({ item, onPress, update, deleteBus }) => {
   );
 };
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
   //TODO implementar funcion para cuando se presione un negocio nos mande a la vista detalle y esa vista detalle muestre toda la info necesaria del negocio
-  const viewSelectedBusiness = () => { };
+
+
+  const viewSelectedBusiness = (bus, id) => {
+    navigation.navigate('Details', { detailsbusiness: bus, idbusiness: id });
+  };
 
   //TODO
-  const updateBusinesss = async (bus,id) => { 
-    navigation.navigate('Edit', {editbusiness: bus, idbusiness:id});
+  const updateBusinesss = async (bus, id) => {
+    navigation.navigate('Edit', { editbusiness: bus, idbusiness: id });
   };
 
   //TODO
@@ -62,6 +64,7 @@ export const HomeScreen = ({navigation}) => {
   };
 
   const [items, setItems] = useState([]);
+  //? DESCOMENTAR ANTES DE HACER EL APK
   // useEffect(async () => {
   //   getAllBusiness().then((items) => setItems(items));
   // }, [deleteBusinesss])
@@ -77,7 +80,7 @@ export const HomeScreen = ({navigation}) => {
           <ListItem
             item={item[1]}
             onPress={() => viewSelectedBusiness}
-            update={() => updateBusinesss(item[1],item[0])}
+            update={() => updateBusinesss(item[1], item[0])}
             deleteBus={() => deleteBusinesss(item[0])}
           />
         )}
