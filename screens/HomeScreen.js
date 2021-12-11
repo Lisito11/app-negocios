@@ -79,7 +79,7 @@ export const HomeScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <ListItem
             item={item[1]}
-            onPress={() => viewSelectedBusiness}
+            onPress={() => viewSelectedBusiness(item[1], item[0])}
             update={() => updateBusinesss(item[1], item[0])}
             deleteBus={() => deleteBusinesss(item[0])}
           />

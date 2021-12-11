@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     SafeAreaView,
     View,
@@ -13,7 +13,6 @@ import {
 } from "react-native";
 
 export const DetailsScreen = ({ navigation, route }) => {
-    console.log(props.route.params.bus)
 
     const { idbusiness, detailsbusiness } = route.params;
 
@@ -35,8 +34,11 @@ export const DetailsScreen = ({ navigation, route }) => {
                     style={styles.image}
                 />
                 <Text style={styles.listText}>{business.name}</Text>
-                <Text style={styles.Text}>{business.cellphone}. {business.type}</Text>
-                <Text style={styles.Text}>{business.direction}. {business.lat} | {business.lat}</Text>
+                <Text style={styles.Text}>{business.cellphone}</Text>
+                <Text style={styles.Text}>{business.type}</Text>
+                <Text style={styles.Text}>{business.lat}</Text>
+                <Text style={styles.Text}>{business.lng}</Text>
+                <Text style={styles.Text}>{business.direction}.</Text>
             </View>
         </View>
     )
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
     headContainer: {
         width: "100%",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "left",
         marginBottom: 10,
     },
     image: {
@@ -85,5 +87,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginStart: 5,
         marginTop: 5,
+        display: "flex"
     }
 });
