@@ -14,12 +14,12 @@ LogBox.ignoreLogs(['Setting a timer']);
 const Map = () => {
     const [markers, setMarker] = useState([]);
     const business = async () => {
-        const res = await getAllBusiness();
-        setMarker(res);
+        // const res = await getAllBusiness();
+        // setMarker(res);
     }
 
     useEffect(async () => {
-       business();
+        business();
     }, [])
 
 
@@ -35,21 +35,21 @@ const Map = () => {
             }}
         >
             {
-            
-            markers && (markers !== [] ? markers.map(marker => (
-                <MapView.Marker
-                    key={marker[0]}
-                    coordinate={{
-                        latitude: marker[1].lat,
-                        longitude: marker[1].lng,
-                    }}
-                    title={marker[1].name}
-                    description={marker[1].type}
 
-                />
-            )) : "")
-            
-            
+                markers && (markers !== [] ? markers.map(marker => (
+                    <MapView.Marker
+                        key={marker[0]}
+                        coordinate={{
+                            latitude: marker[1].lat,
+                            longitude: marker[1].lng,
+                        }}
+                        title={marker[1].name}
+                        description={marker[1].type}
+
+                    />
+                )) : "")
+
+
             }
 
         </MapView>
