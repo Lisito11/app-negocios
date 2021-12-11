@@ -28,7 +28,7 @@ export const DetailsScreen = ({ navigation, route }) => {
     });
 
     return (
-        <TouchableOpacity style={styles.listItem}>
+        <View style={styles.listItem}>
             <View style={styles.headContainer}>
                 <Image
                     source={{ uri: business.pic }}
@@ -38,7 +38,7 @@ export const DetailsScreen = ({ navigation, route }) => {
                 <Text style={styles.Text}>{business.cellphone}. {business.type}</Text>
                 <Text style={styles.Text}>{business.direction}. {business.lat} | {business.lat}</Text>
             </View>
-        </TouchableOpacity>
+        </View>
     )
 }
 
